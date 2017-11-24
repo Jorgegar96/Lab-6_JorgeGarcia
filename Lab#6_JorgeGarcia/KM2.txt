@@ -1,1 +1,12 @@
 alex|1|1|Tierra|
+Humano|1000|50|Tierra|
+Androide|1050|56|Tierra|
+SuperSayayin|1650|60|Namek|
+Androide|500|440|Marte|
+RanaReina|8000|500|Norte|
+Piccolo|9000|600|Namek|
+Dios|12000|590|Marte|
+Sayayin|6500|600|Tierra_2|
+Nappa|650|500|Jupiter|
+Dron|650|670|Tierra|
+Caiman|65000|550|Jupiter_2|

@@ -1,3 +1,7 @@
-kirby_v|100|50|tierra|
+
+
+
+
 
 alex|100|50|luna|
+ 1234|100|50|sol|

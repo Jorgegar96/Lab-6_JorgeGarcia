@@ -1,0 +1,11 @@
+Humano|100|50|Tierra|
+Mono|100|56|Tierra|
+Sayayin|650|60|Namek|
+Oso|50|44|Marte|
+Rana|800|50|Norte|
+Piccolo|900|60|Namek|
+Azul|1200|59|Marte|
+Kirby|650|60|Tierra_2|
+Ramei|650|50|Jupiter|
+Kirby|650|60|Tierra|
+Ramei|650|50|Jupiter_2|

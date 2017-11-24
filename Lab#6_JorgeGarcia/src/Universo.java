@@ -35,6 +35,7 @@ public class Universo {
         int seleccion = jfc.showSaveDialog(null);
         if (seleccion == JFileChooser.APPROVE_OPTION){
             archivo = jfc.getSelectedFile();
+            ruta = archivo.getCanonicalPath();
         }
     }
 

@@ -264,7 +264,7 @@ public class Main extends javax.swing.JFrame {
             this.jb_guardarU.setEnabled(true);
         } else {
             try {
-                enCreacion = new Universo(1,nombre_u);
+                enCreacion = new Universo(1, nombre_u);
             } catch (IOException ex) {
                 Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -449,40 +449,30 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_jb_eliminarSerMouseClicked
 
     private void jb_salirUMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_salirUMouseClicked
-        int op = JOptionPane.showConfirmDialog(this, ""
-                + "¿Desea Guardar Cambios?");
-        if (op == JOptionPane.OK_OPTION) {
-            JFileChooser jfc = new JFileChooser();
-            int seleccion = jfc.showSaveDialog(this);
-            FileWriter fw = null;
-            BufferedWriter bw = null;
-            if (seleccion == JFileChooser.APPROVE_OPTION) {
-                try {
-                    File fichero = null;
-                    if (jfc.getFileFilter().getDescription().equals("Archvos de Texto")) {
-                        fichero = new File(jfc.getSelectedFile().getPath() + ".txt");
-                    } else {
-                        fichero = jfc.getSelectedFile();
+        if (selected_u != null) {
+            int op = JOptionPane.showConfirmDialog(this, ""
+                    + "¿Desea Guardar Cambios?");
+            if (op == JOptionPane.OK_OPTION) {
+                File archivo = new File(selected_u.getRuta());
+                JFileChooser jfc = new JFileChooser();
+                jfc.setSelectedFile(selected_u.getArchivo());
+                int seleccion = jfc.showSaveDialog(null);
+                if (seleccion == JFileChooser.APPROVE_OPTION) {
+                    archivo = jfc.getSelectedFile();
+                    selected_u.setArchivo(archivo);
+                    try {
+                        selected_u.escribirArchivo();
+                    } catch (IOException ex) {
+                        Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
                     }
-                    fw = new FileWriter(fichero);
-                    bw = new BufferedWriter(fw);
-                    bw.flush();
-                    JOptionPane.showMessageDialog(this, "Archivo guardado exitosamente");
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                try {
-                    bw.close();
-                    fw.close();
-                } catch (Exception e) {
                 }
             }
+            selected_u = null;
+            this.jb_nuevoSer.setEnabled(false);
+            this.jb_modSer.setEnabled(false);
+            this.cb_seres.setEnabled(false);
+            this.jb_eliminarSer.setEnabled(false);
         }
-        selected_u = null;
-        this.jb_nuevoSer.setEnabled(false);
-        this.jb_modSer.setEnabled(false);
-        this.cb_seres.setEnabled(false);
-        this.jb_eliminarSer.setEnabled(false);
     }//GEN-LAST:event_jb_salirUMouseClicked
 
     /**
