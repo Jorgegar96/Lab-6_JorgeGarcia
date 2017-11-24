@@ -7,26 +7,35 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+import javax.swing.JFileChooser;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  * @author JorgeLuis
  */
 public class Universo {
-    
+
     private String name;
     private ArrayList<Ser> seres;
     private String ruta;
     private File archivo;
 
-    public Universo() throws IOException {
+    public Universo(int x, String name) throws IOException {
+        this.name = name;
         seres = new ArrayList();
+        setRuta();
+        this.archivo = new File(ruta);
+        JFileChooser jfc = new JFileChooser();
+        jfc.setSelectedFile(archivo);
+        int seleccion = jfc.showSaveDialog(null);
+        if (seleccion == JFileChooser.APPROVE_OPTION){
+            archivo = jfc.getSelectedFile();
+        }
     }
 
     public Universo(String name) throws IOException {
@@ -68,27 +77,27 @@ public class Universo {
         this.archivo = archivo;
     }
 
-    public void addSer(Ser ser){
+    public void addSer(Ser ser) {
         this.seres.add(ser);
     }
-    
+
     @Override
     public String toString() {
         return name;
     }
-    
-    public void escribirArchivo() throws IOException{
+
+    public void escribirArchivo() throws IOException {
         FileWriter fw = null;
         BufferedWriter bw = null;
         try {
-            fw = new FileWriter(archivo,false);
+            fw = new FileWriter(archivo, false);
             bw = new BufferedWriter(fw);
             for (Ser ser : seres) {
                 bw.write(ser.getRaza() + "|");
                 bw.write(ser.getKi() + "|");
                 bw.write(ser.getAños_max() + "|");
                 bw.write(ser.getPlaneta() + "|");
-                bw.write("\n");
+                bw.newLine();
             }
             bw.flush();
         } catch (Exception e) {
@@ -96,26 +105,26 @@ public class Universo {
         bw.close();
         fw.close();
     }
-    
-    public void cargarArchivo(){
-        if (archivo.exists()){
+
+    public void cargarArchivo() {
+        if (archivo.exists()) {
             Scanner sc = null;
             seres = new ArrayList();
             try {
                 sc = new Scanner(archivo);
-                sc.useDelimiter("|");
-                while (sc.hasNextLine()){
-                    seres.add(new Ser(sc.next(),
+                sc.useDelimiter("[|]");
+                while (sc.hasNextLine()) {
+                    Ser s = new Ser(sc.next(),
                             sc.nextInt(),
                             sc.nextInt(),
                             sc.next()
-                        )
                     );
+                    seres.add(s);
                 }
             } catch (Exception e) {
             }
             sc.close();
         }
     }
-    
+
 }

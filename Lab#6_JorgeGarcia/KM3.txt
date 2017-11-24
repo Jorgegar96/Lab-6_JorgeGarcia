@@ -1,0 +1,3 @@
+humano|1|1|tierra|
+
+animal|100|50|tierra|
