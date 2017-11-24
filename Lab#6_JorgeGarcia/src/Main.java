@@ -453,7 +453,7 @@ public class Main extends javax.swing.JFrame {
             int op = JOptionPane.showConfirmDialog(this, ""
                     + "¿Desea Guardar Cambios?");
             if (op == JOptionPane.OK_OPTION) {
-                File archivo = new File(selected_u.getRuta());
+                File archivo = new File("C:\\Users\\JorgeLuis\\Documents" + selected_u.getName() + ".txt");
                 JFileChooser jfc = new JFileChooser();
                 jfc.setSelectedFile(selected_u.getArchivo());
                 int seleccion = jfc.showSaveDialog(null);
