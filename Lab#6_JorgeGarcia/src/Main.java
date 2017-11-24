@@ -121,6 +121,11 @@ public class Main extends javax.swing.JFrame {
     private void jb_crearUMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_crearUMouseClicked
         String nombre_u = JOptionPane.showInputDialog(
                 "Ingrese el nombre del nuevo universo:");
+        try {
+            enCreacion = new Universo(nombre_u);
+        } catch (IOException ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        }
         if (!nombre_u.equals("")) {
             this.jd_crearU.pack();
             this.jd_crearU.setModal(true);
@@ -130,34 +135,30 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_jb_crearUMouseClicked
 
     private void jb_agregarSMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_agregarSMouseClicked
+
         try {
-            enCreacion = new Universo();
-            try {
-                if (!this.tf_raza.equals("")
-                        || !this.tf_planet.equals("")
-                        || (int) this.sp_edad.getValue() < 1
-                        || (int) this.sp_ki.getValue() < 1) {
-                    enCreacion.addSer(new Ser(
-                            tf_raza.getText(),
-                            (int) sp_ki.getValue(),
-                            (int) sp_edad.getValue(),
-                            tf_planet.getText()
-                    )
-                    );
-                    tf_raza.setText("");
-                    sp_ki.setValue(100);
-                    sp_edad.setValue(50);
-                    tf_planet.setText("");
-                } else {
-                    JOptionPane.showMessageDialog(this.jd_crearU, ""
-                            + "Hay campos vacios, porfavor llénelos");
-                }
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(this.jd_crearU,
-                        "Ocurrió un error y no se agregó al ser");
+            if (!this.tf_raza.equals("")
+                    || !this.tf_planet.equals("")
+                    || (int) this.sp_edad.getValue() < 1
+                    || (int) this.sp_ki.getValue() < 1) {
+                enCreacion.addSer(new Ser(
+                        tf_raza.getText(),
+                        (int) sp_ki.getValue(),
+                        (int) sp_edad.getValue(),
+                        tf_planet.getText()
+                )
+                );
+                tf_raza.setText("");
+                sp_ki.setValue(100);
+                sp_edad.setValue(50);
+                tf_planet.setText("");
+            } else {
+                JOptionPane.showMessageDialog(this.jd_crearU, ""
+                        + "Hay campos vacios, porfavor llénelos");
             }
-        } catch (IOException ex) {
-            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this.jd_crearU,
+                    "Ocurrió un error y no se agregó al ser");
         }
     }//GEN-LAST:event_jb_agregarSMouseClicked
 
