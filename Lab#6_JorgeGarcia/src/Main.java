@@ -247,6 +247,8 @@ public class Main extends javax.swing.JFrame {
         String nombre_u = JOptionPane.showInputDialog(
                 "Ingrese el nombre del nuevo universo:");
         accion_ser = 1;
+        this.jb_guardarU.setEnabled(true);
+        this.jb_crearU.setEnabled(true);
         int op = JOptionPane.showConfirmDialog(this,
                 "¿Desea Guardar en el default folder?");
         if (op == JOptionPane.OK_OPTION) {
@@ -393,7 +395,7 @@ public class Main extends javax.swing.JFrame {
             seleccionado = jfc.getSelectedFile();
             this.name_u.setText(nombreU());
             try {
-                selected_u = new Universo(nombreU());
+                selected_u = new Universo(nombreU(), jfc.getSelectedFile().getPath());
                 selected_u.cargarArchivo();
                 No_seres.setText(selected_u.getSeres().size() + "");
                 this.jb_nuevoSer.setEnabled(true);
@@ -450,7 +452,7 @@ public class Main extends javax.swing.JFrame {
 
     private void jb_salirUMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_salirUMouseClicked
         if (selected_u != null) {
-            int op = JOptionPane.showConfirmDialog(this, ""
+            /*int op = JOptionPane.showConfirmDialog(this, ""
                     + "¿Desea Guardar Cambios?");
             if (op == JOptionPane.OK_OPTION) {
                 File archivo = new File("C:\\Users\\JorgeLuis\\Documents" + selected_u.getName() + ".txt");
@@ -467,6 +469,8 @@ public class Main extends javax.swing.JFrame {
                     }
                 }
             }
+            */
+            selected_u.salvar();
             selected_u = null;
             this.jb_nuevoSer.setEnabled(false);
             this.jb_modSer.setEnabled(false);

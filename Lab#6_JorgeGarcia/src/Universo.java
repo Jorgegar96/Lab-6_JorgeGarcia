@@ -7,7 +7,10 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -35,7 +38,7 @@ public class Universo {
         int seleccion = jfc.showSaveDialog(null);
         if (seleccion == JFileChooser.APPROVE_OPTION){
             archivo = jfc.getSelectedFile();
-            ruta = archivo.getCanonicalPath();
+            //ruta = archivo.getCanonicalPath();
         }
     }
 
@@ -43,6 +46,13 @@ public class Universo {
         this.name = name;
         seres = new ArrayList();
         setRuta();
+        this.archivo = new File(ruta);
+    }
+    
+    public Universo(String name, String ruta) throws IOException {
+        this.name = name;
+        seres = new ArrayList();
+        this.ruta = ruta; 
         this.archivo = new File(ruta);
     }
 
@@ -128,4 +138,23 @@ public class Universo {
         }
     }
 
+    public void salvar(){
+        int op = JOptionPane.showConfirmDialog(null, ""
+                    + "¿Desea Guardar Cambios?");
+            if (op == JOptionPane.OK_OPTION) {
+                File archivo = new File("C:\\Users\\JorgeLuis\\Documents" + this.getName() + ".txt");
+                JFileChooser jfc = new JFileChooser();
+                jfc.setSelectedFile(this.getArchivo());
+                int seleccion = jfc.showSaveDialog(null);
+                if (seleccion == JFileChooser.APPROVE_OPTION) {
+                    archivo = jfc.getSelectedFile();
+                    this.setArchivo(archivo);
+                    try {
+                        this.escribirArchivo();
+                    } catch (IOException ex) {
+                        Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+            }
+    }
 }
